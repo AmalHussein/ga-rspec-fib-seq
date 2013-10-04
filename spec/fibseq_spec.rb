@@ -1,32 +1,24 @@
 require 'spec_helper'
-require_relative '../lib/fibseq'
+require_relative '../lib/fiboseq'
 
-describe "#fibonacci"  do #we use a hash here,because that is the way we describe a method
- 	it "should have a method called square" do
- 		expect(method(:square))
+describe "#fib"  do 
+ 	it "should have a method called fib" do
+ 		expect(method(:fib))
  	end 
 
-
-
- 	it "should have one arguement called x" do #it is a method, so is describe. 
- 		parameters = method(:square).parameters
- 		expect(parameters[0]).to include(:req)
- 		expect(parameters[0]).to include(:x)
- 		expect(parameters.length).to eq 1
+ 	it "should put numbers into an incrementing array" do
+ 		expect(fib(5)).to eq [0, 1, 1, 2, 3]
+ 		expect(fib(2)).to eq [0,1]
+ 		expect(fib(3)).to eq [0, 1, 1]
+ 		expect(fib(4)).to eq [0, 1, 1, 2]
+ 		expect(fib(10)).to eq [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 	end
 
- 	it "should square numbers" do
- 		expect(square(0.5)).to eq 0.25
- 		expect(square(1)).to eq 1
- 		expect(square(4)).to eq 16
- 		expect(square(-4)).to eq 16
- 		expect(square(2)).to eq 4
- 		expect(square(2.5)).to eq 6.25
-	end
-
-it "show raise an error when a non-number is passed as a parameter" do 
-    expect{ square("cat") }.to raise_error(NoMethodError)
-    expect{ square(true) }.to raise_error(NoMethodError)
-    expect{ square([1,2]) }.to raise_error(NoMethodError)
+it "show raise an error when a non-positive integer is passed as a parameter" do 
+    expect{ fib("this is text") }.to raise_error(NoMethodError)
+    expect{ fib(true) }.to raise_error(NoMethodError)
+    expect{ fib(false)}.to raise_error(NoMethodError)
+    expect{ fib([1,2]) }.to raise_error(NoMethodError)
+    expect{ fib(-1)}.to raise_error(NoMethodError)
   end
-end
+
